@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IELTS Studio — учись и проверяй себя</title>
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0f766e"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@500;600&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef2f6;--sf:#fff;--tx:#14213d;--mu:#5b6b82;--ac:#0f766e;--ac2:#d7efec;--bd:#d3dce7;--er:#b42318;--ok:#157f3b;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1624;--sf:#172338;--tx:#e8eef7;--mu:#98a8c0;--ac:#4fd1c5;--ac2:#14393c;--bd:#2a3a55;--er:#ff8a7a;--ok:#6ee7a0;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1624;--sf:#172338;--tx:#e8eef7;--mu:#98a8c0;--ac:#4fd1c5;--ac2:#14393c;--bd:#2a3a55;--er:#ff8a7a;--ok:#6ee7a0;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 Manrope,system-ui,sans-serif}
+h1,h2,h3{font-family:Newsreader,Georgia,serif;line-height:1.2;margin:0 0 .5em}
+h1{font-size:clamp(2rem,6vw,3rem)}h2{font-size:1.6rem}h3{font-size:1.2rem}
+header,main{max-width:820px;margin:0 auto;padding:0 18px}
+header{padding-top:28px;padding-bottom:8px}
+header p{color:var(--mu);max-width:56ch;margin:0 0 18px}
+nav{display:flex;gap:8px;border-bottom:1px solid var(--bd);padding-bottom:10px;margin-bottom:22px}
+button{font:inherit;cursor:pointer;color:inherit}
+nav button{background:none;border:1px solid var(--bd);border-radius:999px;padding:8px 18px;font-weight:600}
+nav button.on{background:var(--tx);color:var(--bg);border-color:var(--tx)}
+button:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.tabs button{background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:7px 14px}
+.tabs button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.box{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:20px 22px;margin-bottom:16px}
+.meta{color:var(--mu);font-size:.92rem}
+ul{padding-left:1.2em;margin:.4em 0}li{margin:.35em 0}
+.words{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.w{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:10px 14px;text-align:left}
+.w b{display:block}.w span{color:var(--ac);font-size:.92rem;min-height:1.4em;display:block}
+.cta{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:12px 24px;font-weight:700}
+.cta[disabled]{opacity:.4;cursor:not-allowed}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-weight:600}
+.bar{height:6px;background:var(--bd);border-radius:9px;overflow:hidden;margin-bottom:18px}.bar i{display:block;height:100%;background:var(--ac);transition:width .3s}
+.passage{border-left:4px solid var(--ac);padding:4px 0 4px 16px;margin:0 0 16px;font-family:Newsreader,Georgia,serif;font-size:1.08rem}
+.opt{display:block;width:100%;text-align:left;background:var(--sf);border:1.5px solid var(--bd);border-radius:10px;padding:11px 14px;margin:8px 0}
+.opt.sel{border-color:var(--ac);background:var(--ac2)}
+.opt.good{border-color:var(--ok)}.opt.bad{border-color:var(--er)}
+.big{font:600 4rem/1 Newsreader,Georgia,serif;color:var(--ac)}
+.rev{border-top:1px solid var(--bd);padding:12px 0}.rev .bad{color:var(--er)}.rev .good{color:var(--ok)}
+.row{display:flex;justify-content:space-between;gap:10px;margin:6px 0}
+.row i{display:block;height:8px;background:var(--ac);border-radius:9px}.cell{flex:1;background:var(--bd);border-radius:9px;align-self:center}
+label{display:block;font-weight:600;margin:14px 0}input,select{display:block;width:100%;max-width:340px;margin-top:6px;padding:10px 12px;font:inherit;color:var(--tx);background:var(--bg);border:1.5px solid var(--bd);border-radius:8px}
+.sec{background:none;border:1px solid var(--bd);border-radius:10px;padding:11px 20px;font-weight:600}
+[hidden]{display:none!important}
+.m{margin:10px 0;padding:10px 14px;border-radius:12px;max-width:90%;white-space:pre-wrap}
+.m.ai{background:var(--ac2)}.m.me{background:var(--bg);border:1px solid var(--bd);margin-left:auto}
+.log{min-height:260px;max-height:55vh;overflow:auto}
+.inrow{display:flex;gap:8px;align-items:flex-end}
+.inrow textarea{flex:1;min-width:0;padding:10px 12px;font:inherit;color:var(--tx);background:var(--bg);border:1.5px solid var(--bd);border-radius:8px;resize:vertical}
+.chk{font-weight:400}.chk input{display:inline-block;width:auto;margin:0 8px 0 0}
+.fb{display:flex;align-items:center;gap:16px;margin-bottom:12px}
+#face{flex:none;border-radius:50%;background:var(--ac2)}
+.log{max-height:34vh}
+nav{flex-wrap:wrap}
+.wc{position:relative;background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:10px 44px 10px 14px;cursor:pointer;min-height:64px}
+.wc b{display:block}.wc .d{display:block}.wc .t{display:block;color:var(--ac);font-weight:600}.wc .ipa{display:block;color:var(--mu);font-family:"Segoe UI",system-ui,sans-serif}
+.spk{position:absolute;top:8px;right:8px;background:none;border:1px solid var(--bd);border-radius:8px;padding:2px 8px}
+</style>
+</head>
+<body>
+<header>
+  <h1>IELTS Studio</h1>
+  <p>Изучи структуру экзамена, разбери стратегии и выучи ключевые слова. Затем пройди пробный тест и узнай примерный балл.</p>
+  <nav><button id="n-plan">Моя программа</button><button id="n-learn">Учиться</button><button id="n-test">Тест</button></nav>
+</header>
+<main id="app"></main>
+<script>
+const LEARN={
+Listening:{t:"Listening",info:"30 минут + 10 на перенос ответов · 4 части · 40 вопросов",tips:["Перед записью прочитайте вопросы и подчеркните ключевые слова: числа, имена, даты.","Записи звучат один раз. Если пропустили ответ, сразу переходите к следующему.","Следите за «ловушками»: говорящий часто исправляет себя («Tuesday… no, sorry, Thursday»).","Проверяйте орфографию и число (cat / cats): ошибка в написании — потерянный балл."]},
+Reading:{t:"Reading",info:"60 минут · 3 текста · 40 вопросов",tips:["Не читайте текст целиком: сначала вопросы, потом поиск в тексте (skimming и scanning).","True / False / Not Given: «Not Given» — в тексте об этом просто нет информации.","Ответы идут по порядку текста, кроме заданий на заголовки абзацев.","Не тратьте больше 20 минут на один текст."]},
+Writing:{t:"Writing",info:"60 минут · Task 1 (150 слов, 20 мин) и Task 2 (250 слов, 40 мин)",tips:["Task 1: опишите данные, не давайте мнений. Структура: вступление, обзор главных трендов, детали.","Task 2: ответьте именно на заданный вопрос. Структура: вступление, 2 абзаца-аргумента, вывод.","Критерии: Task Response, Coherence, Lexical Resource, Grammar. Каждый — 25%.","Избегайте заученных шаблонов целиком: экзаменаторы их распознают."]},
+Speaking:{t:"Speaking",info:"11–14 минут · 3 части · живой разговор с экзаменатором",tips:["Part 1: короткие личные ответы по 2–3 предложения с причиной или примером.","Part 2: 1 минута на подготовку, затем 1–2 минуты монолога. Делайте заметки-ключевики.","Part 3: абстрактное обсуждение. Выражайте мнение и сравнивайте («On the one hand…»).","Если не знаете слово — перефразируйте, а не замолкайте."]}};
+const VOC=[["sustainable","устойчивый, экологичный","/səˈsteɪnəbl/"],["mitigate","смягчать, уменьшать","/ˈmɪtɪɡeɪt/"],["fluctuate","колебаться","/ˈflʌktʃueɪt/"],["substantial","существенный","/səbˈstænʃl/"],["controversial","спорный","/ˌkɒntrəˈvɜːʃl/"],["inevitable","неизбежный","/ɪnˈevɪtəbl/"],["comprehensive","всесторонний","/ˌkɒmprɪˈhensɪv/"],["undermine","подрывать","/ˌʌndəˈmaɪn/"],["thrive","процветать","/θraɪv/"],["albeit","хотя и","/ɔːlˈbiːɪt/"],["detrimental","вредный","/ˌdetrɪˈmentl/"],["advocate","отстаивать; сторонник","/ˈædvəkeɪt/"],["constitute","составлять","/ˈkɒnstɪtjuːt/"],["trigger","вызывать","/ˈtrɪɡə/"],["negligible","незначительный","/ˈneɡlɪdʒəbl/"],["deteriorate","ухудшаться","/dɪˈtɪəriəreɪt/"]];
+const Q=[
+{c:"Vocabulary",q:"Governments must take action to ___ the effects of climate change.",o:["mitigate","motivate","migrate","imitate"],a:0,e:"mitigate = смягчать последствия."},
+{c:"Vocabulary",q:"The number of visitors ___ throughout the year, peaking in August.",o:["fluctuated","fluctuate","was fluctuate","fluctuating are"],a:0,e:"Past Simple: fluctuated."},
+{c:"Vocabulary",q:"Choose the word closest in meaning to “substantial”.",o:["tiny","considerable","fragile","temporary"],a:1,e:"substantial ≈ considerable (значительный)."},
+{c:"Vocabulary",q:"The increase in prices was ___, so most people did not notice it.",o:["negligible","inevitable","comprehensive","controversial"],a:0,e:"negligible = незначительный."},
+{c:"Vocabulary",q:"Heavy use of social media can ___ students’ ability to concentrate.",o:["undermine","thrive","advocate","constitute"],a:0,e:"undermine = подрывать, ослаблять."},
+{c:"Grammar",q:"If I ___ more time, I would take extra English classes.",o:["have","had","will have","would have"],a:1,e:"Second conditional: If + Past Simple, would + verb."},
+{c:"Grammar",q:"The graph shows that the population ___ steadily since 2000.",o:["grows","grew","has grown","is grown"],a:2,e:"Since 2000 → Present Perfect: has grown."},
+{c:"Grammar",q:"Neither of the candidates ___ prepared for the interview.",o:["were","was","are","be"],a:1,e:"Neither of + singular verb in formal English."},
+{c:"Grammar",q:"Find the correct sentence.",o:["The informations are useful.","The information is useful.","The informations is useful.","The information are useful."],a:1,e:"information — неисчисляемое: is."},
+{c:"Grammar",q:"She is interested ___ environmental science.",o:["on","at","in","for"],a:2,e:"interested in."},
+{c:"Reading",p:"Urban green spaces have been shown to reduce stress and improve air quality. However, creating parks in dense cities is expensive, and some planners argue that the money would be better spent on public transport. A recent study of twelve cities found that residents living within 300 metres of a park reported higher satisfaction with their neighbourhood.",q:"Statement: Parks are cheaper to build than public transport systems.",o:["True","False","Not Given"],a:2,e:"В тексте сказано, что парки дороги, но сравнения стоимости с транспортом нет → Not Given."},
+{c:"Reading",p:"Urban green spaces have been shown to reduce stress and improve air quality. However, creating parks in dense cities is expensive, and some planners argue that the money would be better spent on public transport. A recent study of twelve cities found that residents living within 300 metres of a park reported higher satisfaction with their neighbourhood.",q:"Statement: Living close to a park is linked to greater neighbourhood satisfaction.",o:["True","False","Not Given"],a:0,e:"Прямо подтверждается исследованием → True."},
+{c:"Reading",p:"Urban green spaces have been shown to reduce stress and improve air quality. However, creating parks in dense cities is expensive, and some planners argue that the money would be better spent on public transport. A recent study of twelve cities found that residents living within 300 metres of a park reported higher satisfaction with their neighbourhood.",q:"Statement: All city planners oppose building new parks.",o:["True","False","Not Given"],a:1,e:"Только «некоторые» (some) планировщики возражают → False."},
+{c:"Writing",q:"Which linking phrase best introduces a contrast in Task 2?",o:["Moreover","Consequently","On the other hand","For instance"],a:2,e:"On the other hand вводит противопоставление."},
+{c:"Writing",q:"In Task 1, what should you NOT include?",o:["An overview of main trends","Comparisons between data","Your personal opinion on the causes","Key figures"],a:2,e:"В Task 1 описывают данные, без личных мнений."},
+{c:"Writing",q:"Choose the best collocation: “The government should ___ stricter laws.”",o:["do","make","bring in","put"],a:2,e:"bring in (introduce) laws — естественное сочетание."}
+];
+const $=s=>document.querySelector(s),app=$("#app");
+let tab="learn",lt="Listening",st={i:0,ans:[],t:900,run:false,done:false},tm=null;
+const esc=s=>String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+function nav(){["plan","learn","test"].forEach(k=>$("#n-"+k).classList.toggle("on",tab===k))}
+function learn(){
+ const d=LEARN[lt];
+ app.innerHTML=`<h2>Разделы экзамена</h2><div class="tabs">${Object.keys(LEARN).map(k=>`<button class="${k===lt?"on":""}" data-l="${k}">${k}${pf&&PUR[pf.pu].f.includes(k)?" ★":""}</button>`).join("")}</div>
+ <div class="box"><h3>${d.t}</h3><p class="meta">${d.info}</p><ul>${d.tips.map(t=>`<li>${t}</li>`).join("")}</ul></div>
+ <h2>Академические слова</h2><p class="meta">Нажмите на слово: появятся перевод и транскрипция, а слово будет произнесено вслух.</p>
+ <div class="words">${VOC.map(w=>`<div class="wc" role="button" tabindex="0" data-w="${w[0]}"><b>${w[0]}</b><span class="meta h">нажмите, чтобы открыть</span><span class="d" hidden><span class="ipa">${w[2]}</span><span class="t">${w[1]}</span></span><button class="spk" aria-label="Произнести слово" title="Произношение">🔊</button></div>`).join("")}</div>
+ <p style="margin:24px 0 40px"><button class="cta" id="go">Пройти пробный тест</button></p>`;
+ app.querySelectorAll("[data-l]").forEach(b=>b.onclick=()=>{lt=b.dataset.l;learn()});
+ app.querySelectorAll(".wc").forEach(c=>{const tg=()=>{const d=c.querySelector(".d"),h=c.querySelector(".h");d.hidden=!d.hidden;h.hidden=!d.hidden;if(!d.hidden)say(c.dataset.w)};c.onclick=tg;c.onkeydown=e=>{if(e.target===c&&(e.key==="Enter"||e.key===" ")){e.preventDefault();tg()}};const k=c.querySelector(".spk");if(window.speechSynthesis){k.onclick=e=>{e.stopPropagation();say(c.dataset.w)}}else k.hidden=true});
+ $("#go").onclick=()=>go("test");
+}
+let pf=null;try{pf=JSON.parse(localStorage.getItem("ielts-profile"))}catch(e){}
+const PUR={uni:{n:"Учёба за границей",ty:"Academic",b:6.5,f:["Writing","Reading"],w1:"описание графиков, таблиц и диаграмм",why:"Университеты обычно требуют Academic и балл 6.0–7.0, часто с минимумом по каждому навыку."},
+imm:{n:"Иммиграция",ty:"General Training",b:6.5,f:["Speaking","Listening"],w1:"письма: формальные, полуформальные и личные",why:"Для иммиграционных программ обычно нужен General Training. Проверьте минимальный балл по каждому навыку."},
+work:{n:"Работа за границей",ty:"General Training",b:6.5,f:["Speaking","Writing"],w1:"письма: формальные, полуформальные и личные",why:"Работодатели чаще принимают General Training, но для медицинских профессий нередко нужен Academic. Уточните требования."},
+me:{n:"Для себя",ty:"Academic",b:6.0,f:["Listening","Reading"],w1:"описание графиков",why:"Academic даёт самую полную проверку уровня английского."}};
+const ht=()=>["learn","test"].includes(location.hash.slice(1))?location.hash.slice(1):"plan";
+function pace(a){return a<16?{m:25,d:4,n:"IELTS официально рассчитан на возраст от 16 лет, поэтому возможность сдачи в вашем возрасте уточните в экзаменационном центре. Занятия короткие, с упором на слова и аудирование."}:a<25?{m:45,d:5,n:"Подходит интенсивный режим: каждый день разный навык, чтобы не терять концентрацию."}:{m:60,d:5,n:"Занимайтесь в удобное время по часу. Темы из вашей работы и жизни пригодятся в Speaking и Writing."}}
+function goalLine(p){if(!pf)return"";const g=PUR[pf.pu].b,b=band(p);return `<p>Ваша цель: <b>${g}</b>. ${b>=g?"По этому тесту вы уже на уровне цели.":"До цели примерно "+(g-b).toFixed(1)+" балла: следуйте программе."}</p>`}
+function plan(){
+ if(pf)return prog();
+ app.innerHTML=`<div class="box"><h2>Подберём программу</h2><p class="meta">Ответьте на три вопроса, и сайт составит план подготовки.</p>
+ <label>Ваш возраст<input id="ag" type="number" min="10" max="80" inputmode="numeric"></label>
+ <label>Для чего вам IELTS<select id="pu"><option value="uni">Учёба за границей</option><option value="imm">Иммиграция</option><option value="work">Работа за границей</option><option value="me">Для себя, проверить уровень</option></select></label>
+ <label>Сколько времени до экзамена<select id="wk"><option value="4">4 недели</option><option value="8" selected>8 недель</option><option value="12">12 недель</option><option value="24">24 недели</option></select></label>
+ <p id="er" style="color:var(--er)" role="alert"></p><button class="cta" id="mk">Составить программу</button></div>`;
+ $("#mk").onclick=()=>{const a=+$("#ag").value;if(!(a>=10&&a<=80)){$("#er").textContent="Введите возраст от 10 до 80 лет.";return}
+  pf={age:a,pu:$("#pu").value,weeks:+$("#wk").value};try{localStorage.setItem("ielts-profile",JSON.stringify(pf))}catch(e){}prog()}
+}
+function prog(){
+ const P=PUR[pf.pu],k=pace(pf.age),w=pf.weeks,a=Math.max(1,Math.round(w*.3)),c=Math.max(1,Math.round(w*.3)),b=w-a-c,r=(x,y)=>x===y?`Неделя ${x}`:`Недели ${x}–${y}`;
+ const ph=[{t:`${r(1,a)}: фундамент`,i:[`Изучите формат ${P.ty} во вкладке «Учиться»`,"Учите по 5 новых слов в день","Пройдите пробный тест, чтобы зафиксировать стартовый уровень"]},
+ {t:`${r(a+1,a+b)}: навыки`,i:[`Приоритет: ${P.f.join(" и ")}, по 2 занятия в неделю`,`Writing Task 1: ${P.w1}`,"Остальные навыки: по 1 занятию в неделю","Раз в две недели проходите пробный тест"]},
+ {t:`${r(a+b+1,w)}: пробные экзамены`,i:["Пробные тесты на время, с разбором каждой ошибки","Повторите слабые темы","За два дня до экзамена: лёгкое повторение и хороший сон"]}];
+ app.innerHTML=`<div class="box"><h2>Ваша программа</h2><p><b>Формат экзамена:</b> ${P.ty}<br><b>Цель:</b> ${P.b} баллов · <b>Срок:</b> ${w} нед. · <b>Возраст:</b> ${pf.age}<br><b>Режим:</b> ${k.d} занятий в неделю по ${k.m} минут</p><p class="meta">${P.why}</p><p>${k.n}</p></div>
+ ${ph.map(x=>`<div class="box"><h3>${x.t}</h3><ul>${x.i.map(i=>`<li>${i}</li>`).join("")}</ul></div>`).join("")}
+ <p style="margin-bottom:40px"><button class="cta" id="p1">Начать с теста</button> <button class="sec" id="p2">Изучить материалы</button> <button class="sec" id="p3">Изменить данные</button></p>`;
+ $("#p1").onclick=()=>go("test");$("#p2").onclick=()=>go("learn");
+ $("#p3").onclick=()=>{pf=null;try{localStorage.removeItem("ielts-profile")}catch(e){}plan()};
+}
+function say(w){try{if(!window.speechSynthesis)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(w);u.lang="en-GB";u.rate=.85;speechSynthesis.speak(u)}catch(e){}}
+function fmt(s){return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+function test(){
+ if(st.done)return result();
+ if(!st.run){app.innerHTML=`<div class="box"><h2>Пробный тест</h2><p>${Q.length} вопросов: словарь, грамматика, чтение и письмо. Время: 15 минут. По итогам вы получите примерную оценку по шкале IELTS и разбор ошибок.</p><button class="cta" id="st">Начать тест</button></div>`;
+  $("#st").onclick=start;return}
+ const q=Q[st.i],sel=st.ans[st.i];
+ app.innerHTML=`<div class="top"><span>Вопрос ${st.i+1} из ${Q.length} · ${q.c}</span><span id="tm">${fmt(st.t)}</span></div>
+ <div class="bar"><i style="width:${st.i/Q.length*100}%"></i></div>
+ <div class="box">${q.p?`<p class="passage">${esc(q.p)}</p>`:""}<h3>${esc(q.q)}</h3>
+ ${q.o.map((o,i)=>`<button class="opt ${sel===i?"sel":""}" data-o="${i}">${esc(o)}</button>`).join("")}</div>
+ <button class="cta" id="nx" ${sel===undefined?"disabled":""}>${st.i===Q.length-1?"Завершить":"Дальше"}</button>`;
+ app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{st.ans[st.i]=+b.dataset.o;test()});
+ $("#nx").onclick=()=>{if(st.i===Q.length-1)finish();else{st.i++;test()}};
+}
+function start(){st={i:0,ans:[],t:900,run:true,done:false};clearInterval(tm);tm=setInterval(()=>{st.t--;const e=$("#tm");if(e)e.textContent=fmt(st.t);if(st.t<=0)finish()},1000);test()}
+function finish(){clearInterval(tm);st.run=false;st.done=true;save();test()}
+function band(p){const m=[[.95,8.5],[.85,7.5],[.75,7],[.65,6.5],[.55,6],[.45,5.5],[.35,5],[.25,4.5],[0,4]];return m.find(x=>p>=x[0])[1]}
+function save(){try{const c=Q.filter((q,i)=>st.ans[i]===q.a).length;localStorage.setItem("ielts-last",JSON.stringify({c,n:Q.length,d:new Date().toLocaleDateString("ru-RU")}))}catch(e){}}
+function result(){
+ const c=Q.filter((q,i)=>st.ans[i]===q.a).length,p=c/Q.length,cats={};
+ Q.forEach((q,i)=>{cats[q.c]=cats[q.c]||[0,0];cats[q.c][1]++;if(st.ans[i]===q.a)cats[q.c][0]++});
+ let prev="";try{const l=JSON.parse(localStorage.getItem("ielts-last"));if(l)prev=`<p class="meta">Последний результат сохранён: ${l.c} из ${l.n} (${l.d}).</p>`}catch(e){}
+ app.innerHTML=`<div class="box"><p class="meta">Примерная оценка</p><div class="big">${band(p).toFixed(1)}</div><p>Правильных ответов: <b>${c} из ${Q.length}</b> (${Math.round(p*100)}%). Это ориентир, а не официальный балл: на реальном экзамене оценка зависит от всех четырёх навыков.</p>${prev}${goalLine(p)}
+ ${Object.entries(cats).map(([k,v])=>`<div class="row"><span style="min-width:110px">${k}</span><span class="cell"><i style="width:${v[0]/v[1]*100}%"></i></span><span>${v[0]}/${v[1]}</span></div>`).join("")}</div>
+ <h2>Разбор</h2><div class="box">${Q.map((q,i)=>{const ok=st.ans[i]===q.a;return `<div class="rev"><b>${i+1}. ${esc(q.q)}</b><br>${ok?`<span class="good">Верно: ${esc(q.o[q.a])}</span>`:`<span class="bad">Ваш ответ: ${st.ans[i]===undefined?"нет ответа":esc(q.o[st.ans[i]])}</span> · <span class="good">Правильно: ${esc(q.o[q.a])}</span>`}<br><span class="meta">${q.e}</span></div>`}).join("")}</div>
+ <p style="margin-bottom:40px"><button class="cta" id="rt">Пройти ещё раз</button> <button class="w" id="bk" style="display:inline-block;width:auto">Вернуться к урокам</button></p>`;
+ $("#rt").onclick=start;$("#bk").onclick=()=>go("learn");
+}
+function go(t){tab=t;try{history.replaceState(null,"","#"+t)}catch(e){}render()}
+function render(){nav();tab==="plan"?plan():tab==="learn"?learn():test();window.scrollTo(0,0)}
+$("#n-plan").onclick=()=>go("plan");$("#n-learn").onclick=()=>go("learn");$("#n-test").onclick=()=>go("test");
+tab=ht();
+addEventListener("hashchange",()=>{const t=ht();if(t!==tab){tab=t;render()}});
+render();
+</script>
+<script>if("serviceWorker"in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))</script>
+</body>
+</html>
